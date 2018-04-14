@@ -15,7 +15,7 @@ public class Host implements Participant {
      * @param capacity: the number of students the person can host;
      *                 decreases as available spots are filled.
      * @param priorities: list contains booleans as string ie: ['true', 'true', 'false']
-     *                   accommodation goes as follows: [undoc, lgbt].
+     *                  of accommodations.
      * @param home: the hometown of the host.
      * @param major: the major of the host.
      */

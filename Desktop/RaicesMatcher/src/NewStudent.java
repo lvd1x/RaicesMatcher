@@ -12,7 +12,7 @@ public class NewStudent implements Participant {
     /**
      * @param ID: the ID_key of the student.
      * @param priorities: list contains booleans as string ie: ['true', 'true', 'false']
-     *                   accommodation goes as follows: [undoc, lgbt].
+     *                  of accommodations.
      * @param home: the hometown of the student.
      * @param major: the intended major of the student.
      */
