@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
-
 import java.io.File;
 
 public class Writer {
@@ -52,7 +51,7 @@ public class Writer {
         FileWriter writer = null;
 
         try {
-            writer = new FileWriter("input/SeniorPairings.txt");
+            writer = new FileWriter("moreFinal/finalPairs.csv");
 
             writer.append(FILE_HEADER);
             writer.append(NEWLINE);
@@ -196,7 +195,7 @@ public class Writer {
         match(matcher1, girls, keys);
         //matcher1.printStatus();
         match(matcher2, boys, keyss);
-        matcher2.printStatus();
+        //matcher2.printStatus();
         write(matcher1, matcher2);
         //matcher.printFinalPairings();
     }

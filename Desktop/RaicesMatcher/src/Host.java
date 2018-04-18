@@ -9,6 +9,7 @@ public class Host implements Participant {
     private String major;
     private String email;
     private LinkedList<NewStudent> hosting;
+    private boolean isTrained;
 
     /**
      * @param ID: the ID_key of the student.
@@ -25,6 +26,7 @@ public class Host implements Participant {
         this.home = home;
         this.major = major;
         this.email = "";
+        this.isTrained = false;
         this.hosting = new LinkedList<>();
 
         // sets any priority accommodations

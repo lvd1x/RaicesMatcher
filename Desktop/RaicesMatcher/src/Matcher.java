@@ -1,7 +1,5 @@
 import edu.princeton.cs.algs4.MaxPQ;
 import edu.princeton.cs.algs4.BST;
-
-import javax.naming.NamingEnumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -80,6 +78,14 @@ public class Matcher {
         } else if (host.priority() >= student.priority()) {
             int i = 2;
             while (i >= 0) {
+                if (!provided[i] && required[i]) {
+                    return false;
+                } else {
+                    i -= 1;
+                }
+            }
+
+            /*while (i >= 0) {
                 if (provided[i] == required[i]) {
                         Participant.match(host, student);
                         return true;
@@ -87,9 +93,10 @@ public class Matcher {
                    return false;
                 }
                 i -= 1;
-            }
+            }*/
         }
-        return false;
+        Participant.match(host, student);
+        return true;
     }
 
     /**
@@ -157,7 +164,7 @@ public class Matcher {
         Host potentialHost = HOSTS.delMax();
 
         // Looks for compatible host
-        while (!canAccommodate(potentialHost, s) && potentialHost.priority() != 0) {
+        while (!canAccommodate(potentialHost, s) && potentialHost.priority() != 0 && !HOSTS.isEmpty()) {
             notMatch.add(potentialHost);
             potentialHost = HOSTS.delMax();
         }
@@ -239,14 +246,19 @@ public class Matcher {
      * Similar to print status but shows student first then the host.
      */
     public void printFinalPairings() {
+        LinkedList<Host> canHost = new LinkedList<>();
         for (Host h: FinalPairings) {
             if (h.isHosting()) {
+                if (!h.isMatched()) {
+                    canHost.add(h);
+                }
                 for (NewStudent s: h.getHosting()) {
                     s.printMatches();
                 }
             }
              else {
-                h.printMatches();
+                canHost.add(h);
+                //h.printMatches();
             }
         }
 
@@ -257,6 +269,14 @@ public class Matcher {
                 System.out.println(s.getName());
             }
         }
+
+        if (!canHost.isEmpty()) {
+            System.out.println("Available Host: ");
+            for (Host h: canHost) {
+                System.out.println(h.getName());
+            }
+        }
+
     }
 
 
@@ -335,7 +355,8 @@ public class Matcher {
     }
 
     public void greedyMatch() {
-        System.out.println(totalCap());
+        System.out.println("max students that can be hosted: " + totalCap());
+        System.out.println("Total number of students: " + STUDENTS.size());
         NewStudent currentStudent = STUDENTS.max();
 
         // matches priority students first
